@@ -22,7 +22,7 @@ def main(file: str):
     threshold = 0.95
     frame_interval = 10  # seconds
     ret, previous_frame = video_capture.read()
-    previous_frame = previous_frame[90:-90, 280:-280]
+    previous_frame = previous_frame[90:-90, 280:-280]  # Crop image if needed
 
     fps = int(video_capture.get(cv2.CAP_PROP_FPS))
     totalFrames = int(video_capture.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -53,6 +53,7 @@ def main(file: str):
                 before_gray, after_gray, full=True)
             # print("Image Similarity: {:.4f}%".format(score * 100))
             progress.update(compareTask, advance=1)
+
             if score < threshold:
                 image = Image.fromarray(
                     cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
@@ -61,12 +62,6 @@ def main(file: str):
                 pdf = pytesseract.image_to_pdf_or_hocr(
                     image, 'eng', extension='pdf')
 
-                f = open(
-                    f'frame_{i:04}.pdf', "w+b")
-                f.write(bytearray(pdf))
-                f.close()
-
-                # pdf_file_in_memory = BytesIO(pdf)
                 merger.append(BytesIO(pdf))
             progress.update(ocrTask, advance=1)
             previous_frame = frame
