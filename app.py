@@ -41,7 +41,7 @@ def main(file: str):
             if not ret:
                 break
 
-            frame = frame[90:-90, 280:-280]
+            frame = frame[90:-90, 160:-160]
             progress.update(cropTask, advance=1)
 
             # Convert images to grayscale
