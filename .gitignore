@@ -1,4 +1,5 @@
 .venv/
-frames/*.png
+*.mp4
+*.pdf
 .mp4
 .DS_Store

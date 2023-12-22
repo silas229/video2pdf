@@ -22,7 +22,8 @@ def main(file: str):
     threshold = 0.95
     frame_interval = 10  # seconds
     ret, previous_frame = video_capture.read()
-    previous_frame = previous_frame[90:-90, 280:-280]  # Crop image if needed
+    # Crop image if needed; xCrop 160 for 16:9, 280 for 4:3
+    previous_frame = previous_frame[90:-90, 160:-160]
 
     fps = int(video_capture.get(cv2.CAP_PROP_FPS))
     totalFrames = int(video_capture.get(cv2.CAP_PROP_FRAME_COUNT))
