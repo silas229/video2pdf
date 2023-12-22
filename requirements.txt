@@ -1,0 +1,7 @@
+opencv-python
+pypdf2
+pytesseract
+typer
+rich-tools
+scikit-image
+SSIM-PIL
